@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Polling Booth</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("D:\voting (1).png") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+
+        .container { 
+            margin-top: 10%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .option {
+            cursor: pointer;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 20px;
+            width: 200px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px;
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+   <script>
+    function useScanner() {
+        fetch("http://127.0.0.1:5000/start-scanner")
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error("Error:", error));
+    }
+</script>
+
+    
+</head>
+<body>
+
+    <div class="container">
+        <h1>Voting Polling Booth</h1>
+        <p>CHOOSE AN OPTION</p>
+        <div class="options">
+            <div class="option" onclick="enterPassword()">
+                <img src="C:\Users\nikhi\OneDrive\Pictures\Icecream Screen Recorder\Screenshot_2025_03_23-1.png" alt="Phone">
+                <p>Phone</p>
+            </div>
+            <div class="option" onclick="useScanner()">
+                <img src="C:\Users\nikhi\OneDrive\Pictures\Icecream Screen Recorder\Screenshot_2025_03_23-2.png" alt="Scanner">
+                <p>Scanner</p>
+            </div>
+        </div>
+        <div id="passwordBox" class="hidden">
+            <input type="password" id="passwordInput" placeholder="Enter Password">
+            <button onclick="submitPassword()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        function enterPassword() {
+            document.getElementById("passwordBox").classList.remove("hidden");
+        }
+
+        function submitPassword() {
+            let password = document.getElementById("passwordInput").value;
+            if (password) {
+                alert("Access Granted! Redirecting...");
+                window.location.href = "dashboard.html"; // Redirect to next page
+            } else {
+                alert("Please enter a valid password.");
+            }
+        }
+
+        function useScanner() {
+            alert("RFID/NFC Scanner Activated!");
+            // Add scanner integration here
+        }
+    </script>
+
+</body>
+</html>
